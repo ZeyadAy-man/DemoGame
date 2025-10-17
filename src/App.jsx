@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber"
 import { Camera } from "three"
 import { OrbitControls, useGLTF, useAnimations } from "@react-three/drei"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRef } from "react";
 import * as THREE from "three";
 
@@ -72,8 +72,18 @@ function AnimatedModel() {
 
 function App() {
 
+  const [ counter, setCounter ] = useState(0);
+
+  useEffect(() => {
+    console.log("Counter:", counter);
+  }, [counter])
+  
+  console.log("Render App:", counter);
+  
   return (
     <>
+      <button onClick={() => setCounter(counter + 1)}>Increasing</button>
+      <button onClick={() => setCounter(counter - 1)}>Decreasing</button>
       <Canvas camera={{ position: [0, 0, 3], fov: 75 }} style={{height: "100vh", width: "100vw"}}>
         <ambientLight intensity={0.1} />
         <directionalLight color="red" position={[0, 0, 5]} />
